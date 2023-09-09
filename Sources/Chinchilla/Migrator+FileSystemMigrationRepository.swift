@@ -10,3 +10,14 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 //===----------------------------------------------------------------------===//
+
+import Foundation
+
+extension Migrator where Repository == FileSystemMigrationRepository {
+    public convenience init(migrationsFolderPath: String, target: Target) throws {
+        try self.init(
+            repository: FileSystemMigrationRepository(url: URL(filePath: migrationsFolderPath)),
+            target: target
+        )
+    }
+}
