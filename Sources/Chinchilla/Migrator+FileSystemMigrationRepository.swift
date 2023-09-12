@@ -16,7 +16,7 @@ import Foundation
 extension Migrator where Repository == FileSystemMigrationRepository {
     public convenience init(migrationsFolderPath: String, target: Target) throws {
         try self.init(
-            repository: FileSystemMigrationRepository(url: URL(filePath: migrationsFolderPath)),
+            repository: FileSystemMigrationRepository(url: URL(fileURLWithPath: migrationsFolderPath)),
             target: target
         )
     }

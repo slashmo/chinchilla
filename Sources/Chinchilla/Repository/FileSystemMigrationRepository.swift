@@ -41,12 +41,12 @@ extension FileSystemMigrationRepository: MigrationRepository {
                     throw FileSystemMigrationRepositoryError.malformedMigrationID(idRawValue)
                 }
 
-                guard let upFileURL = fileURLs.first(where: { $0.path().hasSuffix(".up.sql") }) else {
+                guard let upFileURL = fileURLs.first(where: { $0.path.hasSuffix(".up.sql") }) else {
                     throw FileSystemMigrationRepositoryError.missingUpFileURL(id)
                 }
                 let upSQL = try String(contentsOf: upFileURL)
 
-                guard let downFileURL = fileURLs.first(where: { $0.path().hasSuffix(".down.sql") }) else {
+                guard let downFileURL = fileURLs.first(where: { $0.path.hasSuffix(".down.sql") }) else {
                     throw FileSystemMigrationRepositoryError.missingDownFileURL(id)
                 }
                 let downSQL = try String(contentsOf: downFileURL)
