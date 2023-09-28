@@ -39,13 +39,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        swift: [5.8]
+        swift: [5.8, latest]
 
     steps:
       - name: Install Swift
-        uses: slashmo/install-swift@v0.4.0
+        uses: vapor/swiftly-action@v0.1
         with:
-          version: ${{ matrix.swift }}
+          toolchain: ${{ matrix.swift }}
 
       - name: Checkout
         uses: actions/checkout@v3.6.0
