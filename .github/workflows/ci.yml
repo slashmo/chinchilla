@@ -6,26 +6,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Mint
-        run: |
-          git clone https://github.com/yonaskolb/Mint.git
-          cd Mint
-          swift run mint install yonaskolb/mint
-          echo "$HOME/.mint/bin" >> $GITHUB_PATH
-          rm -rf Mint
-
       - name: Checkout
         uses: actions/checkout@v3.6.0
 
-      - name: Cache Mint
-        uses: actions/cache@v3.3.1
-        with:
-          path: ~/.mint
-          key: ${{ runner.os }}-mint-${{ hashFiles('Mintfile') }}
-          restore-keys: ${{ runner.os }}-mint-
-
       - name: Bootstrap Mint
-        run: mint bootstrap
+        uses: irgaly/setup-mint@v1
 
       - name: Run soundness
         run: |
@@ -39,13 +24,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        swift: [5.8]
+        swift: [5.8, latest]
 
     steps:
       - name: Install Swift
-        uses: slashmo/install-swift@v0.4.0
+        uses: vapor/swiftly-action@v0.1
         with:
-          version: ${{ matrix.swift }}
+          toolchain: ${{ matrix.swift }}
 
       - name: Checkout
         uses: actions/checkout@v3.6.0
